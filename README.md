@@ -9,7 +9,12 @@ npm install
 ```bash
 ionic serve
 ```
-## Run the app (android)
+## Run the app (android version) from Windows
+
+Requirements:
+- Android Studio
+- Java
+- Node (npm)
 
 ### Build app
 ```bash
