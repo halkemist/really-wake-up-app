@@ -4,21 +4,23 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
-    redirect: '/tabs/alarms',
+    redirect: '/alarms',
   },
   {
-    path: '/tabs/',
-    component: () => import ('../components/Tabs.vue'),
-    children: [
-      {
-        path: '',
-        redirect: '/tabs/alarms'
-      },
-      {
-        path: 'alarms',
-        component: () => import ('../views/HomePage.vue')
-      }
-    ]
+    path: '/alarms',
+    component: () => import ('@/views/Alarms.vue')
+  },
+  {
+    path: '/alarms/add',
+    component: () => import ('@/views/AlarmAdd.vue')
+  },
+  {
+    path: '/stats',
+    component: () => import ('@/views/Stats.vue')
+  },
+  {
+    path: '/settings',
+    component: () => import ('@/views/Settings.vue')
   }
 ]
 
