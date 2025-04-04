@@ -3,21 +3,40 @@
     <ion-content>
       <div>
         <h2>Alarms List</h2>
-        <ion-button expand="block" @click="addAlarm">Add alarm</ion-button>
+        <ion-buttons slot="start">
+          <ion-button @click="addAlarm">+</ion-button>
+        </ion-buttons>
       </div>
+      <ion-list>
+        <AlarmItem v-for="(alarm, index) in alarms" :item="alarm" :key="index"/>
+      </ion-list>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-  import { IonButton, IonContent, IonPage } from '@ionic/vue';
+  import AlarmItem from '@/components/AlarmItem.vue';
+import { IonButtons, IonButton, IonContent, IonPage, IonList } from '@ionic/vue';
   import { useRouter } from 'vue-router';
 
   const router = useRouter();
 
   const addAlarm = () => {
-    router.push('/alarm/add');
+    router.push('/alarms/add');
   };
+
+  const alarms = [
+    {
+      name: 'test1',
+      days: [0, 2, 4],
+      active: true
+    },
+    {
+      name: 'test5',
+      days: [6, 7],
+      active: false
+    }
+  ];
   </script>
 
   <style scoped>
