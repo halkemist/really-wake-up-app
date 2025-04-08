@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
   import AlarmItem from '@/components/AlarmItem.vue';
-import { IonButtons, IonButton, IonContent, IonPage, IonList } from '@ionic/vue';
+  import { IonButtons, IonButton, IonContent, IonPage, IonList } from '@ionic/vue';
   import { useRouter } from 'vue-router';
 
   const router = useRouter();
@@ -27,14 +27,20 @@ import { IonButtons, IonButton, IonContent, IonPage, IonList } from '@ionic/vue'
 
   const alarms = [
     {
+      id: 0,
       name: 'test1',
+      time: '00:50',
       days: [0, 2, 4],
-      active: true
+      active: true,
+      puzzleType: 0
     },
     {
+      id: 1,
       name: 'test5',
+      time: '08:30',
       days: [6, 7],
-      active: false
+      active: false,
+      puzzleType: 0
     }
   ];
   </script>
