@@ -1,12 +1,16 @@
 <template>
   <ion-page>
-    <ion-content>
-      <div>
-        <h2>Alarms List</h2>
-        <ion-buttons slot="start">
-          <ion-button @click="addAlarm">+</ion-button>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button @click="addAlarm">
+            <ion-icon :icon="addCircleOutline"></ion-icon>
+          </ion-button>
         </ion-buttons>
-      </div>
+        <ion-title>Alarms</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
       <ion-list>
         <AlarmItem v-for="(alarm, index) in alarms" :item="alarm" :key="index"/>
       </ion-list>
@@ -18,7 +22,8 @@
   import AlarmItem from '@/components/AlarmItem.vue';
   import { Alarm } from '@/interfaces/main';
   import alarmService from '@/services/alarmService';
-  import { IonButtons, IonButton, IonContent, IonPage, IonList, useIonRouter, onIonViewDidEnter } from '@ionic/vue';
+  import { IonButtons, IonButton, IonContent, IonIcon, IonPage, IonList, IonHeader, IonToolbar, IonTitle, useIonRouter, onIonViewDidEnter } from '@ionic/vue';
+  import { addCircleOutline } from 'ionicons/icons';
   import { ref } from 'vue';
 
   const ionRouter = useIonRouter();

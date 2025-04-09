@@ -4,23 +4,23 @@
       <ion-tabs>
         <!-- Content -->
         <ion-router-outlet></ion-router-outlet>
-        <!-- Tabs -->
-        <ion-tab-bar slot="bottom">
-          <ion-tab-button tab="alarms" href="/alarms">
-            <ion-icon :icon="alarmOutline"></ion-icon>
-            <ion-label>Réveils</ion-label>
-          </ion-tab-button>
-          
-          <ion-tab-button tab="stats" href="/stats">
-            <ion-icon :icon="statsChartOutline"></ion-icon>
-            <ion-label>Stats</ion-label>
-          </ion-tab-button>
-          
-          <ion-tab-button tab="settings" href="/settings">
-            <ion-icon :icon="settingsOutline"></ion-icon>
-            <ion-label>Paramètres</ion-label>
-          </ion-tab-button>
-        </ion-tab-bar>
+        <!-- Footer -->
+        <ion-footer slot="bottom">
+          <ion-tab-bar>
+            <ion-tab-button tab="alarms" href="/alarms">
+              <ion-icon :icon="alarmOutline"></ion-icon>
+              <ion-label>Alarms</ion-label>
+            </ion-tab-button>
+            <ion-tab-button tab="stats" href="/stats">
+              <ion-icon :icon="statsChartOutline"></ion-icon>
+              <ion-label>Stats</ion-label>
+            </ion-tab-button>
+            <ion-tab-button tab="settings" href="/settings">
+              <ion-icon :icon="settingsOutline"></ion-icon>
+              <ion-label>Settings</ion-label>
+            </ion-tab-button>
+          </ion-tab-bar>
+        </ion-footer>
       </ion-tabs>
     </ion-page>
   </ion-page>
@@ -34,7 +34,8 @@
     IonTabs,
     IonRouterOutlet,
     IonTabBar,
-    IonTabButton
+    IonTabButton,
+    IonFooter
   } from '@ionic/vue';
   import { ref } from 'vue';
   import {
