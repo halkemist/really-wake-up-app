@@ -20,6 +20,7 @@
   </ion-item-sliding>
 </template>
 <script setup lang="ts">
+  import { alarm } from '@/interfaces/main';
   import {
     IonItemSliding,
     IonItem,
@@ -33,14 +34,7 @@
   import { trashOutline, clipboard } from 'ionicons/icons';
 
   const props = defineProps<{
-    item?: {
-      id: number,
-      name: string,
-      time: string, // HH:mm (24h)
-      days: Array<number>,
-      active: boolean,
-      puzzleType: number
-    }
+    item?: alarm
   }>();
 
   const weekDays = [0, 1, 2, 3, 4, 5, 6];

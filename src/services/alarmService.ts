@@ -19,8 +19,19 @@ export default {
       alarm.id = Date.now();
     }
 
-    alarms.push(alarm);
+    const cleanAlarm = {
+      id: alarm.id,
+      name: alarm.name,
+      time: alarm.time,
+      days: [...alarm.days],
+      active: alarm.active,
+      puzzleType: Number(alarm.puzzleType)
+    };
+
+    alarms.push(cleanAlarm);
+
     await storage.set(ALARMS_KEY, alarms);
+    
     return alarm;
   },
 
