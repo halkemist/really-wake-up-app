@@ -1,0 +1,1 @@
+// Background Runner service file: https://capacitorjs.com/docs/apis/background-runner

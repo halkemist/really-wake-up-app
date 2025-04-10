@@ -6,6 +6,7 @@ const storage = new Storage();
 
 storage.create();
 
+// CRUD Functions
 const getAlarms = async (): Promise<Alarm[]> => {
   const alarms = await storage.get(ALARMS_KEY);
   return alarms || [];
@@ -53,6 +54,7 @@ const deleteAlarm = async (id: number): Promise<void> => {
   await storage.set(ALARMS_KEY, updateAlarms);
 };
 
+// Other functions
 const getAlarmById = async (id: number): Promise<Alarm | undefined> => {
   const alarms = await getAlarms();
   return alarms.find(a => a.id === id);
