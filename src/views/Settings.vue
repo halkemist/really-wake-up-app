@@ -14,7 +14,7 @@
         </ion-item>
         <ion-item>
           <ion-label>{{ $t('settings.language') }}</ion-label>
-          <ion-select v-model="selectedLanguage" @ionChange="changeLanguage($event)">
+          <ion-select v-model="selectedLanguage" @ionChange="changeLanguage($event)" slot="end">
             <ion-select-option v-for="lang in availableLanguages" :key="lang.code" :value="lang.code">
               {{ lang.name }}
             </ion-select-option>

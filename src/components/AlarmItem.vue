@@ -21,6 +21,7 @@
 </template>
 <script setup lang="ts">
   import { Alarm } from '@/interfaces/main';
+  import alarmService from '@/services/alarmService';
   import {
     IonItemSliding,
     IonItem,
@@ -40,13 +41,21 @@
   const weekDays = [0, 1, 2, 3, 4, 5, 6];
   const beautifulWeekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
+  const emit = defineEmits<{
+    (e: 'alarmDeleted', id: number): void
+  }>();
+
   const formatDay = (day: number): string => {
     return beautifulWeekDays[day];
   }
   const getPuzzleIcon = (puzzleType: number) => { 
     return Number(puzzleType) === 1 ? clipboardOutline : calculatorOutline;
   }
-  const toggleAlarm = (id: number) => {}
-  const editAlarm = (id: number) => {}
-  const deleteAlarm = (id: number) => {}
+  const toggleAlarm = (id: number) => {} // TODO
+  const editAlarm = (id: number) => {} // TODO
+
+  const deleteAlarm = async (id: number) => {
+    await alarmService.deleteAlarm(id);
+    emit('alarmDeleted', id);
+  }
 </script>

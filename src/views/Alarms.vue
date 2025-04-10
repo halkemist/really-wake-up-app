@@ -12,7 +12,12 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <AlarmItem v-for="(alarm, index) in alarms" :item="alarm" :key="index"/>
+        <AlarmItem 
+        v-for="(alarm, index) in alarms" 
+        :item="alarm" 
+        :key="index"
+        @alarm-deleted="handleAlarmDeleted"
+        />
       </ion-list>
     </ion-content>
   </ion-page>
@@ -35,6 +40,10 @@
 
   const loadAlarms = async () => {
     alarms.value = await alarmService.getAlarms();
+  };
+
+  const handleAlarmDeleted = async () => {
+    await loadAlarms();
   };
 
   onIonViewDidEnter(loadAlarms);
