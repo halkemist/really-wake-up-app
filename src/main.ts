@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 
 import { IonicVue } from '@ionic/vue';
+import { setupI18n } from './i18n';
 import themeService from './services/themeService';
 
 /* Core CSS required for Ionic components to work properly */
@@ -35,12 +36,13 @@ import '@ionic/vue/css/palettes/dark.class.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const app = createApp(App)
-  .use(IonicVue)
-  .use(router);
-
-themeService.initializeTheme().then(() => {
-  router.isReady().then(() => {
-    app.mount('#app');
-  });
+Promise.all([
+  setupI18n(),
+  themeService.initializeTheme()
+]).then(([i18n]) => {
+  createApp(App)
+    .use(IonicVue)
+    .use(router)
+    .use(i18n)
+    .mount('#app');
 });

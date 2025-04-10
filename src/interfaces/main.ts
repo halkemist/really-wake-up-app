@@ -1,3 +1,5 @@
+import en from '../i18n/locales/en.json';
+
 export interface Alarm {
   id: number,
   name: string,
@@ -6,3 +8,6 @@ export interface Alarm {
   active: boolean,
   puzzleType: number
 }
+
+export type MessageSchema = typeof en;
+export type AvailableLocales = 'en' | 'fr';

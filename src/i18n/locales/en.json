@@ -1,0 +1,13 @@
+{
+  "layouts": {
+    "alarmsTitle": "Alarms",
+    "addAlarmsTitle": "Add Alarm",
+    "statsTitle": "Stats",
+    "settingsTitle": "Settings"
+  },
+  "settings": {
+    "darkMode": "Dark Mode",
+    "appearance": "Appearance",
+    "language": "Language"
+  }
+}

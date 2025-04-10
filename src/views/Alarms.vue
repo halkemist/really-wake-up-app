@@ -7,7 +7,7 @@
             <ion-icon :icon="addCircleOutline"></ion-icon>
           </ion-button>
         </ion-buttons>
-        <ion-title>Alarms</ion-title>
+        <ion-title>{{ $t('layouts.alarmsTitle') }}</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>

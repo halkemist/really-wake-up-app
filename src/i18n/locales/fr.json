@@ -1,0 +1,13 @@
+{
+  "layouts": {
+    "alarmsTitle": "Réveils",
+    "addAlarmsTitle": "Ajouter un réveil",
+    "statsTitle": "Statistiques",
+    "settingsTitle": "Paramètres"
+  },
+  "settings": {
+    "darkMode": "Mode sombre",
+    "appearance": "Apparence",
+    "language": "Langage"
+  }
+}

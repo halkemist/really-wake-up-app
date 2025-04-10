@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button default-href="/alarms"></ion-back-button>
         </ion-buttons>
-        <ion-title>Add Alarm</ion-title>
+        <ion-title>{{ $t('layouts.addAlarmsTitle') }}</ion-title>
       </ion-toolbar>
     </ion-header>
     
