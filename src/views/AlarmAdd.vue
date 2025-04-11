@@ -82,10 +82,12 @@
     useIonRouter
   } from '@ionic/vue';
   import { Alarm } from '@/interfaces/main';
-  import alarmService from '@/services/alarmService';
   import { ref } from 'vue';
+  import { useAlarms } from '@/composables/useAlarm';
 
   const ionRouter = useIonRouter();
+  const { addAlarm } = useAlarms();
+
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   // Alarm object with default values
@@ -114,7 +116,7 @@
       }
 
       // Register the new alarm
-      await alarmService.addAlarm(alarm.value);
+      await addAlarm(alarm.value);
 
       // Redirect to alarm list
       ionRouter.back();

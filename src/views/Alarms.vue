@@ -26,12 +26,15 @@
 <script setup lang="ts">
   import AlarmItem from '@/components/AlarmItem.vue';
   import { Alarm } from '@/interfaces/main';
-  import alarmService from '@/services/alarmService';
   import { IonButtons, IonButton, IonContent, IonIcon, IonPage, IonList, IonHeader, IonToolbar, IonTitle, useIonRouter, onIonViewDidEnter } from '@ionic/vue';
   import { addCircleOutline } from 'ionicons/icons';
   import { ref } from 'vue';
+  import { useAlarms } from '@/composables/useAlarm';
 
   const ionRouter = useIonRouter();
+  const { getAlarms } = useAlarms();
+
+  // State
   const alarms = ref<Alarm[]>([]);
 
   const addAlarm = () => {
@@ -39,10 +42,12 @@
   };
 
   const loadAlarms = async () => {
-    alarms.value = await alarmService.getAlarms();
+    console.log('load alarms from vue')
+    alarms.value = await getAlarms();
   };
 
   const handleAlarmDeleted = async () => {
+    console.log('handle alarm deleted')
     await loadAlarms();
   };
 

@@ -13,7 +13,7 @@
     </ion-item>
     <!-- Sliding End Part -->
     <ion-item-options side="end">
-      <ion-item-option color="danger" @click="deleteAlarm(props.item.id)">
+      <ion-item-option color="danger" @click="removeAlarm(props.item.id)">
         <ion-icon slot="icon-only" :icon="trashOutline"></ion-icon>
       </ion-item-option>
     </ion-item-options>
@@ -21,7 +21,6 @@
 </template>
 <script setup lang="ts">
   import { Alarm } from '@/interfaces/main';
-  import alarmService from '@/services/alarmService';
   import {
     IonItemSliding,
     IonItem,
@@ -33,18 +32,23 @@
     IonItemOption
   } from '@ionic/vue';
   import { trashOutline, clipboardOutline, calculatorOutline } from 'ionicons/icons';
+  import { useAlarms } from '@/composables/useAlarm';
 
+  const { deleteAlarm } = useAlarms();
+
+  // State
   const props = defineProps<{
     item?: Alarm
   }>();
-
   const weekDays = [0, 1, 2, 3, 4, 5, 6];
   const beautifulWeekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
+  // Event
   const emit = defineEmits<{
     (e: 'alarmDeleted', id: number): void
   }>();
 
+  // Functions
   const formatDay = (day: number): string => {
     return beautifulWeekDays[day];
   }
@@ -54,8 +58,8 @@
   const toggleAlarm = (id: number) => {} // TODO
   const editAlarm = (id: number) => {} // TODO
 
-  const deleteAlarm = async (id: number) => {
-    await alarmService.deleteAlarm(id);
+  const removeAlarm = async (id: number) => {
+    await deleteAlarm(id);
     emit('alarmDeleted', id);
   }
 </script>
