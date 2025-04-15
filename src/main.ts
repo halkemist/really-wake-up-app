@@ -4,7 +4,7 @@ import router from './router';
 
 import { IonicVue } from '@ionic/vue';
 import { setupI18n } from './i18n';
-import themeService from './services/themeService';
+import { useTheme } from './composables/useTheme';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -36,9 +36,11 @@ import '@ionic/vue/css/palettes/dark.class.css';
 /* Theme variables */
 import './theme/variables.css';
 
+const { initializeTheme } = useTheme();
+
 Promise.all([
   setupI18n(),
-  themeService.initializeTheme()
+  initializeTheme()
 ]).then(([i18n]) => {
   createApp(App)
     .use(IonicVue)

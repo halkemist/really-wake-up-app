@@ -1,10 +1,12 @@
 import { Storage } from '@ionic/storage';
-import { ref } from 'vue';
+import { ref, readonly } from 'vue';
 
+// State
 const DARK_MODE_KEY = 'dark-mode-enabled';
 const storage = new Storage();
 const isDarkMode = ref(false);
 
+// Init storage
 const initStorage = async () => {
   await storage.create();
 };
@@ -51,9 +53,12 @@ const toggleDarkMode = async () => {
   return newValue;
 };
 
-export default {
-  isDarkMode,
-  initializeTheme,
-  setDarkMode,
-  toggleDarkMode
+export function useTheme() {
+  return {
+    isDarkMode: readonly(isDarkMode),
+    
+    initializeTheme,
+    setDarkMode,
+    toggleDarkMode
+  };
 };

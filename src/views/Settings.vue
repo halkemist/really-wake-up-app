@@ -42,12 +42,12 @@
   import { type AvailableLocales } from '@/interfaces/main';
   import { getAvailableLanguages, getCurrentLanguage, setLanguage } from '@/i18n';
   import { ref } from "vue";
-  import themeService from '@/services/themeService';
+  import { useTheme } from '@/composables/useTheme';
 
-  const isDarkMode = themeService.isDarkMode;
+  const { isDarkMode, setDarkMode } = useTheme();
 
   const toggleChange = (event: ToggleCustomEvent) => {
-    themeService.setDarkMode(event.detail.checked);
+    setDarkMode(event.detail.checked);
   };
 
   const availableLanguages = getAvailableLanguages();

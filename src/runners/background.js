@@ -8,6 +8,10 @@
 // <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 // <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+import { useAlarms } from "../composables/useAlarm";
+
+const { getAlarms } = useAlarms();
+
 // Function pour jouer son d'alarme en continu
 const playAlarmSound = async () => {
   // Get alarm from storage
@@ -27,6 +31,8 @@ const playAlarmSound = async () => {
 
 const getActiveAlarm = async () => {
   // Get alarm from storage
+  const alarms = await getAlarms();
+  return alarms[0];
 };
 
 const sendAlarmNotification = async () => {
