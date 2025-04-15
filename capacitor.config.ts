@@ -14,8 +14,12 @@ const config: CapacitorConfig = {
       label: "Alarm Service",
       src: "runners/background.js",
       event: "alarm",
-      autoStart: true
+      repeat: false,
+      interval: 0
     }
+  },
+  android: {
+    allowMixedContent: true, // development only: allow the web view to load files from different schemes
   }
 };
 
