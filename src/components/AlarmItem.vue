@@ -1,6 +1,6 @@
 <template>
   <ion-item-sliding v-if="props.item">
-    <ion-item @click="editAlarm(props.item.id)">
+    <ion-item @click="editAlarm(props.item)">
       <ion-icon :icon="getPuzzleIcon(props.item.puzzleType)" slot="start"></ion-icon>
       <ion-label>
         <h2>{{ props.item.time }}</h2>
@@ -34,7 +34,7 @@
   import { trashOutline, clipboardOutline, calculatorOutline } from 'ionicons/icons';
   import { useAlarms } from '@/composables/useAlarm';
 
-  const { deleteAlarm } = useAlarms();
+  const { deleteAlarm, toggleAlarmStatus, updateAlarm } = useAlarms();
 
   // State
   const props = defineProps<{
@@ -45,21 +45,29 @@
 
   // Event
   const emit = defineEmits<{
-    (e: 'alarmDeleted', id: number): void
+    (e: 'alarmChange', id: number): void
   }>();
 
   // Functions
   const formatDay = (day: number): string => {
     return beautifulWeekDays[day];
-  }
+  };
   const getPuzzleIcon = (puzzleType: number) => { 
     return Number(puzzleType) === 1 ? clipboardOutline : calculatorOutline;
-  }
-  const toggleAlarm = (id: number) => {} // TODO
-  const editAlarm = (id: number) => {} // TODO
+  };
+
+  const toggleAlarm = async (id: number) => {
+    await toggleAlarmStatus(id);
+    emit('alarmChange', id);
+
+  };
+  const editAlarm = async (alarm: Alarm) => {
+    await updateAlarm(alarm);
+    emit('alarmChange', alarm.id);
+  };
 
   const removeAlarm = async (id: number) => {
     await deleteAlarm(id);
-    emit('alarmDeleted', id);
-  }
+    emit('alarmChange', id);
+  };
 </script>

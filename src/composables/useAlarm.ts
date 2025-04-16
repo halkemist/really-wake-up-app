@@ -1,9 +1,12 @@
 import { ref, readonly } from "vue";
 import { type Alarm } from "@/interfaces/main";
 import { Storage } from "@ionic/storage";
+import { useAlarmNotification } from "./useAlarmNotification";
 
 const ALARMS_KEY = 'my-alarms';
 const storage = new Storage();
+
+const { scheduleAlarmNotification } = useAlarmNotification();
 
 // State
 const isInitialized = ref(false);
@@ -34,13 +37,15 @@ const getAlarms = async (): Promise<Alarm[]> => {
   return alarms.value;
 };
 
-const addAlarm = async (alarm: Alarm): Promise<Alarm> => {
+const saveAlarm = async (alarm: Alarm): Promise<Alarm> => {
   await init();
 
+  // Provide an ID
   if (!alarm.id) {
     alarm.id = Date.now();
   }
 
+  // Prepare the data
   const cleanAlarm = {
     id: alarm.id,
     name: alarm.name,
@@ -51,7 +56,12 @@ const addAlarm = async (alarm: Alarm): Promise<Alarm> => {
   };
 
   alarms.value.push(cleanAlarm);
+
+  // Store in local storage
   await storage.set(ALARMS_KEY, JSON.parse(JSON.stringify(alarms.value)));
+
+  // Prepare the alarm notification
+  if (alarm.active) await scheduleAlarmNotification(alarm);
   
   return cleanAlarm;
 };
@@ -59,11 +69,19 @@ const addAlarm = async (alarm: Alarm): Promise<Alarm> => {
 const updateAlarm = async (alarm: Alarm): Promise<Alarm> => {
   await init();
 
+  // Find the alarm index
   const index = alarms.value.findIndex(a => a.id === alarm.id);
 
   if (index !== -1) {
+    // Find the alarm from the index
     alarms.value[index] = alarm;
+
+    // Replace the alarm with the new data in the local storage
     await storage.set(ALARMS_KEY, JSON.parse(JSON.stringify(alarms.value)));
+
+    // Prepare the alarm notification
+    if (alarm.active) await scheduleAlarmNotification(alarm);
+
     return alarm;
   }
 
@@ -84,7 +102,7 @@ const getAlarmById = async (id: number): Promise<Alarm | undefined> => {
   return alarms.value.find(a => a.id === id);
 };
 
-const toggleAlarm = async (id: number): Promise<Alarm> => {
+const toggleAlarmStatus = async (id: number): Promise<Alarm> => {
   await init();
   
   const index = alarms.value.findIndex(a => a.id === id);
@@ -103,11 +121,11 @@ export function useAlarms() {
     alarms: readonly(alarms),
 
     getAlarms,
-    addAlarm,
+    saveAlarm,
     updateAlarm,
     deleteAlarm,
     getAlarmById,
-    toggleAlarm,
+    toggleAlarmStatus,
 
     refreshAlarms
   };

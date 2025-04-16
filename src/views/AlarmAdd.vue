@@ -86,7 +86,7 @@
   import { useAlarms } from '@/composables/useAlarm';
 
   const ionRouter = useIonRouter();
-  const { addAlarm } = useAlarms();
+  const { saveAlarm } = useAlarms();
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -116,7 +116,7 @@
       }
 
       // Register the new alarm
-      await addAlarm(alarm.value);
+      await saveAlarm(alarm.value);
 
       // Redirect to alarm list
       ionRouter.back();

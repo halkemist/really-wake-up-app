@@ -16,7 +16,7 @@
         v-for="(alarm, index) in alarms" 
         :item="alarm" 
         :key="index"
-        @alarm-deleted="handleAlarmDeleted"
+        @alarm-change="handleLoadAlarms"
         />
       </ion-list>
     </ion-content>
@@ -46,8 +46,7 @@
     alarms.value = await getAlarms();
   };
 
-  const handleAlarmDeleted = async () => {
-    console.log('handle alarm deleted')
+  const handleLoadAlarms = async () => {
     await loadAlarms();
   };
 
